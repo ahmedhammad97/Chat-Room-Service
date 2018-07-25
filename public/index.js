@@ -8,7 +8,7 @@ $('#create').on('click', ()=>{
     contentType: 'application/x-www-form-urlencoded',
     url: 'http://localhost:5000/create',
     success: function(data) {
-      console.log(data);
+      $('#message').text("Unkwon error, please email me at hammad97official@gmail.com");
     },
     error: function(data){
       $('#message').text('Something went wrong, check your connection!');
@@ -29,8 +29,7 @@ $('#join').on('click', ()=>{
     url: 'http://localhost:5000/join',
     success: function(data) {
       if(data.available){
-        //access granted
-        console.log("Joining room");
+        $('#message').text("Unkwon error, please email me at hammad97official@gmail.com");
       }
       else{
         $('#message').text('Wrong code, check it again.');
@@ -42,8 +41,6 @@ $('#join').on('click', ()=>{
   });
 
 });
-
-
 
 
 

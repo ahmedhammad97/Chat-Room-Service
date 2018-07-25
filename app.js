@@ -15,6 +15,9 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 //For static front-end files
 app.use(express.static('public'));
 
+//View engine
+app.set('view engine', 'ejs');
+
 
 const server = app.listen(5000, ()=>{
   console.log("Listening at port 5000");
@@ -33,16 +36,16 @@ var rooms = ["abcdefgh"];
 
 app.post('/create', urlencodedParser, (req, res)=>{
     let code = unique.generate(rooms);
-    res.send(code);
+    res.render('./public/chat', {'nickname' : req.body.nickname, 'code' : code});
     rooms.push(code);
 });
 
 app.post('/join', urlencodedParser, (req, res)=>{
     if(includes(rooms, req.body.roomCode)){
-      res.send({available: true});
+      res.render('./public/chat', {'nickname' : req.body.nickname, 'code' : code});
     }
     else{
-      res.send({available: false});
+      res.send({'available' : false});
     }
 });
 
