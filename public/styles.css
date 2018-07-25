@@ -1,0 +1,86 @@
+body{
+  background-color: lightblue;
+}
+
+div{
+  background-color: #d8ecf3;
+  padding: 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 10%;
+}
+
+h1{
+  color: white;
+  font-weight: bolder;
+  padding: 20px;
+  font-family: monospace;
+}
+
+label{
+  color: #999;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+input{
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid #999;
+  background-color: #f3f3f3;
+  color: #666;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: monospace;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: darkgrey;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: darkgrey;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: darkgrey;
+}
+
+button{
+  width: 220px;
+  height: 30px;
+  color: #666;
+  border-radius: 10px;
+  font-size: 17px;
+  font-family: monospace;
+  font-weight: bold;
+  border: 2px solid;
+  transition: 0.5s ease;
+  -webkit-transition: 0.5s ease; /* Safari */
+  opacity: 0.8;
+}
+
+button:hover{
+  opacity: 1;
+  cursor: pointer;
+}
+
+#create{
+  background-color: lightgreen;
+  border-color: lawngreen;
+}
+
+#join{
+  background-color: #FFE876;
+  border-color: gold;
+}
+
+h3{
+  font-size: 17px;
+  color: #999;
+  font-family: monospace;
+}
