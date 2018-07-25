@@ -9,20 +9,22 @@
   <body>
     <center>
       <h1>Welcome to Chat Room Service</h1>
-      <div>
+      <div class="main">
         <h3 id="message"></h3>
         <br />
         <label>Pick a nickname</label>&nbsp&nbsp
         <input type="text" name="nickname" placeholder="eg. ahmedhammad97" id="nickname">
         <br /><br /><br /><br />
-        <button type="button" name="button" id="create">Create a new room</button>
-        <br /><br />
-        <h3>OR</h3>
-        <br /><br />
+        <div class="sub">
         <label>Enter room code</label>&nbsp&nbsp
         <input type="text" name="" placeholder="eg. ss54f5s2s" id="roomCode">
         <br /><br />
         <button type="button" name="button" id="join">Join room</button>
+        </div>
+        <br /><br />
+        <h3>OR</h3>
+        <br />
+        <button type="button" name="button" id="create">Create a new room</button>
       </div>
     </center>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

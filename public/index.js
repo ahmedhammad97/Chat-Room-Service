@@ -1,6 +1,7 @@
 $('#create').on('click', ()=>{
   if(emptyNickname()){return;}
 
+  //REQUESTING A ROOM FROM THE SERVER
   $.ajax({
     type: 'POST',
     data: {'nickname' :  $('#nickname').val()},
@@ -16,16 +17,24 @@ $('#create').on('click', ()=>{
 
 });
 
+
 $('#join').on('click', ()=>{
   if(emptyNickname()){return;}
 
+  //ASKING FOR PERMISSION TO JOIN THE ROOM
   $.ajax({
     type: 'POST',
     data: {'nickname' : $('#nickname').val(), 'roomCode' :  $('#roomCode').val()},
     contentType: 'application/x-www-form-urlencoded',
     url: 'http://localhost:5000/join',
     success: function(data) {
-      console.log(data);
+      if(data.available){
+        //access granted
+        console.log("Joining room");
+      }
+      else{
+        $('#message').text('Wrong code, check it again.');
+      }
     },
     error: function(data){
       $('#message').text('Something went wrong, check your connection!');
@@ -34,6 +43,11 @@ $('#join').on('click', ()=>{
 
 });
 
+
+
+
+
+// HELPER FUNCTIONS
 function emptyNickname(){
   if($('#nickname').val() == ""){
     $('#message').text('A nickname is required.');

@@ -2,8 +2,8 @@ body{
   background-color: lightblue;
 }
 
-div{
-  background-color: #d8ecf3;
+.main{
+  background-color: #c5e3ed;
   padding: 20px;
   border-radius: 20px;
   display: inline-block;
@@ -15,6 +15,15 @@ h1{
   font-weight: bolder;
   padding: 20px;
   font-family: monospace;
+}
+
+.sub{
+  background-color: #d8ecf3;
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+
+
 }
 
 label{
