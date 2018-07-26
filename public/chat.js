@@ -6,7 +6,7 @@ $('#chatBox').css('height', totalHeight - 200);
 const nickname = $('#nickname').text();
 const roomCode = $('#roomCode').text();
 
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('http://192.168.43.78:5000');
 
 //Joining the room
 socket.on('initialConnection', data=>{
@@ -51,5 +51,5 @@ socket.on('typing', data=>{
   $('#typing').text(data.nickname + ' is typing...');
   setTimeout(()=>{
     $('#typing').text('');
-  },5000);
+  },7000);
 })

@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const includes = require('array-includes');
 const path = require("path");
 
+
 //Main Express component
 const app = express();
 
@@ -29,12 +30,14 @@ const server = app.listen(5000, ()=>{
 const io = socket(server);
 
 
+//Temp variable
+var rooms = ["abcdefgh"];
+
+
 //Express REST
 app.get('/', (req, res)=>{
   res.render('index');
 });
-
-var rooms = ["abcdefgh"];
 
 app.post('/create', urlencodedParser, (req, res)=>{
     let code = unique.generate(rooms);
@@ -52,7 +55,7 @@ app.post('/join', urlencodedParser, (req, res)=>{
 });
 
 
-
+//Socket Api's
 io.on('connection', (socket)=>{
   console.log("Connection made with use of Socket");
   socket.emit('initialConnection');
