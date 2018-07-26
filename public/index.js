@@ -5,10 +5,9 @@ $('#create').on('click', ()=>{
   $.ajax({
     type: 'POST',
     data: {'nickname' :  $('#nickname').val()},
-    contentType: 'application/x-www-form-urlencoded',
     url: 'http://localhost:5000/create',
     success: function(data) {
-      $('#message').text("Unkwon error, please email me at hammad97official@gmail.com");
+      $('html').html(data);
     },
     error: function(data){
       $('#message').text('Something went wrong, check your connection!');
@@ -25,14 +24,13 @@ $('#join').on('click', ()=>{
   $.ajax({
     type: 'POST',
     data: {'nickname' : $('#nickname').val(), 'roomCode' :  $('#roomCode').val()},
-    contentType: 'application/x-www-form-urlencoded',
     url: 'http://localhost:5000/join',
     success: function(data) {
-      if(data.available){
-        $('#message').text("Unkwon error, please email me at hammad97official@gmail.com");
+      if(data.available === false){
+        $('#message').text('Wrong code, check it again.');
       }
       else{
-        $('#message').text('Wrong code, check it again.');
+        $('html').html(data);
       }
     },
     error: function(data){
