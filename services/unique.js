@@ -1,15 +1,16 @@
-const includes = require('array-includes');
-
 //Generates a random 8 digit code
-exports.generate = function(arr){
-  let exist = false;
-  let code = "";
+exports.generate = function(Room){
+  let exist, code;
   do{
+    exist = false;
     code = "";
+
     for(i=0; i<8; i++){
       code = code + chars[Math.floor(Math.random()*chars.length)]
     }
-    if(includes(arr, code)){exist = true; console.log("Duplicate code generated");}
+    Room.findOne({'code' : code}).then(result=>{
+      if(result){exist = true; console.log("Duplicate code generated " + code);}
+    })
   }while(exist);
   return code;
 }
