@@ -5,7 +5,7 @@ $('#create').on('click', ()=>{
   $.ajax({
     type: 'POST',
     data: {'nickname' :  $('#nickname').val()},
-    url: 'http://192.168.43.78:5000/create',
+    url: 'http://localhost:5000/create',
     success: function(data) {
       $('html').html(data);
     },
@@ -24,7 +24,7 @@ $('#join').on('click', ()=>{
   $.ajax({
     type: 'POST',
     data: {'nickname' : $('#nickname').val(), 'roomCode' :  $('#roomCode').val()},
-    url: 'http://192.168.43.78:5000/join',
+    url: 'http://localhost:5000/join',
     success: function(data) {
       if(data.available === false){
         $('#message').text('Wrong code, check it again.');
