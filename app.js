@@ -66,5 +66,8 @@ io.on('connection', (socket)=>{
     io.sockets.in(data.room).emit('chatMessage', data);
   });
 
+  socket.on('typing', data=>{
+    socket.broadcast.to(data.room).emit('typing', data);
+  })
 
 });

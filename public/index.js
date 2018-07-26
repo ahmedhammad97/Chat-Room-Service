@@ -44,7 +44,7 @@ $('#join').on('click', ()=>{
 
 // HELPER FUNCTIONS
 function emptyNickname(){
-  if($('#nickname').val() == ""){
+  if($('#nickname').val().trim() == ""){
     $('#message').text('A nickname is required.');
     return true;
   }
