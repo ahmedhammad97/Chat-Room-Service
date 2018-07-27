@@ -27,7 +27,7 @@ $('#join').on('click', ()=>{
     url: 'http://localhost:5000/join',
     success: function(data) {
       if(data.available === false){
-        $('#message').text('Wrong code, check it again.');
+        $('#message').text(data.message);
       }
       else{
         $('html').html(data);

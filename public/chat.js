@@ -51,5 +51,5 @@ socket.on('typing', data=>{
   $('#typing').text(data.nickname + ' is typing...');
   setTimeout(()=>{
     $('#typing').text('');
-  },7000);
+  },5000);
 })

@@ -32,7 +32,7 @@ const io = socket(server);
 
 
 //MongoDB Api's
-mongoose.connect("mongodb://localhost:27017/testdb", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/test4db", { useNewUrlParser: true });
 
 mongoose.Promise = global.Promise;
 
@@ -54,20 +54,26 @@ app.post('/create', urlencodedParser, (req, res)=>{
     //Adding room to Database
     let tempRoom = new Room({
       'code' : code,
-      'members' : [{'nickname' : req.body.nickname}]
+      'members' : []
     });
     tempRoom.save();
 });
 
 app.post('/join', urlencodedParser, (req, res)=>{
     Room.findOne({'code' : req.body.roomCode}).then(result=>{
-      if(result){
-        res.render('chat', {'nickname' : req.body.nickname, 'code' : req.body.roomCode});
-        result.members.push({'nickname' : req.body.nickname});
-        result.save();
+      if(result){ //This room exists
+        let tempArr = result.members.filter(record=>{
+          return record.nickname === req.body.nickname;
+        })
+        if(tempArr.length===0){ //The room exists and the nickname doesn't
+          res.render('chat', {'nickname' : req.body.nickname, 'code' : req.body.roomCode});
+        }
+        else{ //This nickname exists - It must be unique -
+          res.send({'available' : false, 'message' : 'Same nickname exists inside this room'});
+        }
       }
-      else{
-        res.send({'available' : false});
+      else{ //The room doesn't exist
+        res.send({'available' : false, 'message' : 'Such a code does not currentyl exist'});
       }
     })
 });
@@ -81,7 +87,16 @@ io.on('connection', (socket)=>{
   socket.on('initialConnection', (data)=>{
     socket.join(data.roomCode);
     console.log(data.nickname + " joined room " + data.roomCode);
+
+    //Adding User to Room Database
+    Room.findOne({'code' : data.roomCode}).then(result=>{
+      setTimeout(()=>{ //To ensure data is written to database
+        result.members.push({'nickname' : data.nickname, 'id' : socket.id});
+        result.save();
+      },2000);
+    })
   });
+
 
   socket.on('chatMessage', data=>{
     io.sockets.in(data.room).emit('chatMessage', data);
@@ -90,5 +105,25 @@ io.on('connection', (socket)=>{
   socket.on('typing', data=>{
     socket.broadcast.to(data.room).emit('typing', data);
   })
+
+  socket.on('disconnect', ()=>{
+
+    //Delete user from Database
+    Room.findOne({'members.id' : socket.id}).then(result=>{
+      if(result.members.length===1){
+        //Remove room if the only member disconnected
+        Room.findByIdAndRemove(result._id).exec();
+        console.log("Deleted room " + result._id);
+      }
+      else{ //Just remove the member from members array
+        let tempArr = result.members.filter(record=>{
+          return record.id === socket.id;
+        })
+        console.log(tempArr[0].nickname + " disconnected");
+        tempArr[0].remove();
+        result.save();
+      }
+    })
+  });
 
 });

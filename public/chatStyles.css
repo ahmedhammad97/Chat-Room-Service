@@ -73,3 +73,8 @@ footer button{
   padding-left: 20px;
   font-size: 20px;
 }
+
+#typing{
+  font-size: 16px;
+  font-style: italic;
+}
