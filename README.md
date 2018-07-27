@@ -16,5 +16,5 @@ When a user leaves the room, the back-end removes his record from the database, 
   - Jquery
   
 ## Screenshots
-![Screenshot1](index.png)
-![Screenshot2](chat.png)
+![Screenshot1](https://github.com/ahmedhammad97/Chat-Room-Service/blob/master/index.png)
+![Screenshot2](https://github.com/ahmedhammad97/Chat-Room-Service/blob/master/chat.png)
