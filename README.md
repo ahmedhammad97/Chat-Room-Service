@@ -12,6 +12,7 @@ When a user leaves the room, the back-end removes his record from the database, 
   - Express.js
   - Mongoose
   - Socket.io
+  - EJS view engine
   - AJAX
   - Jquery
   
