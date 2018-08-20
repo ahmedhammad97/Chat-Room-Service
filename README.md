@@ -1,5 +1,5 @@
 # Chat-Room-Service
-A service based on Socket.io, that provides a chat rooms for users, whose can either create, or join using a unique code.
+A service based on Socket.io, that provides a chat rooms for users, whom can either create, or join using a unique code.
 
 ## How it works:
 I used an Ajax calls for the front-end to post requring to create/join a room. After server-side validates the room code and nickname availability from the database, a Socket.io channel is created, and the chat room is rendered to the browser.
