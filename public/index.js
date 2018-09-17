@@ -7,7 +7,7 @@ $('#create').on('click', ()=>{
     data: {'nickname' :  $('#nickname').val()},
     url: 'http://localhost:5000/create',
     success: function(data) {
-      $('html').html(data);
+      startChat(data.code, $('#nickname').val());
     },
     error: function(data){
       $('#message').text('Something went wrong, check your connection!');
@@ -30,7 +30,7 @@ $('#join').on('click', ()=>{
         $('#message').text(data.message);
       }
       else{
-        $('html').html(data);
+        startChat($('#roomCode').val(), $('#nickname').val());
       }
     },
     error: function(data){
@@ -50,3 +50,8 @@ function emptyNickname(){
   }
   return false;
 };
+
+function startChat(code, nickname){
+  localStorage.setItem("nickname", nickname);
+  window.location.replace(`http://localhost:5000/room/${code}`);
+}

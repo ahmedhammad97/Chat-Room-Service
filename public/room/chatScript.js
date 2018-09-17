@@ -1,3 +1,7 @@
+//Setting Nickname
+$('#nickname').text(localStorage.getItem("nickname"));
+localStorage.removeItem("nickname");
+
 //Styling chatBox
 let totalHeight = $(window).height();
 $('#chatBox').css('height', totalHeight - 200);

@@ -1,30 +1,30 @@
-<head>
-  <meta charset="utf-8">
-  <title>Room <%=code%></title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
-  <link rel="stylesheet" href="chatStyles.css">
-</head>
-<body>
-  <div id="fakeBody">
-    <header><center><div>
-      <span>Your nickname is <i id="nickname"><%=nickname%></i></span>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp
-      <span>This room code is <i id="roomCode"><%=code%></i></span>
-    </div></center></header>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Room <%=code%></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <link rel="stylesheet" href="chatStyles.css">
+  </head>
+  <body>
+    <div id="fakeBody">
+      <header><center><div>
+        <span>Your nickname is <i id="nickname"></i></span>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp
+        <span>This room code is <i id="roomCode"><%=code%></i></span>
+      </div></center></header>
 
-    <div id="chatBox">
+      <div id="chatBox"></div>
 
+      <br />
+      <center><span id="typing"></span></center>
+
+      <footer>
+        <input type="text" id="messageBox" name="message" value="" placeholder="Type your message">
+        <button type="button" name="button" id="sendMessage">Send</button>
+      </footer>
     </div>
-
-    <br />
-    <center>
-        <span id="typing"></span>
-    </center>
-
-    <footer>
-      <input type="text" id="messageBox" name="message" value="" placeholder="Type your message">
-      <button type="button" name="button" id="sendMessage">Send</button>
-    </footer>
-  </div>
-  <script src="chat.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="chatScript.js"></script>
+  </body>
+</html>

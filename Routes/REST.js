@@ -12,16 +12,23 @@ router.get('/', (req, res)=>{
   res.render('index');
 });
 
+router.get('/room/:code', (req, res)=>{
+  res.render('chat', {'code' : req.params.code});
+});
+
 // Request a new room
 router.post('/create', urlencodedParser, (req, res)=>{
     let code = unique.generate(Room);
-    res.render('chat', {'nickname' : req.body.nickname, 'code' : code});
+
     //Adding room to Database
     let tempRoom = new Room({
       'code' : code,
       'members' : []
     });
-    tempRoom.save();
+    tempRoom.save(err=>{
+      if(err){res.end();}
+      res.send({'code': code});
+    });
 });
 
 //Request access to room by code
@@ -32,7 +39,7 @@ router.post('/join', urlencodedParser, (req, res)=>{
           return record.nickname === req.body.nickname;
         })
         if(tempArr.length===0){ //The room exists and the nickname doesn't
-          res.render('chat', {'nickname' : req.body.nickname, 'code' : req.body.roomCode});
+          res.send({'available' : true});
         }
         else{ //This nickname exists - It must be unique -
           res.send({'available' : false, 'message' : 'Same nickname exists inside this room'});
