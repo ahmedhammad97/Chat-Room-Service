@@ -22,7 +22,7 @@ socket.on('initialConnection', data=>{
 
 //Recieving a message
 socket.on('chatMessage', data=>{
-  $("#chatBox").append('<br><p><strong>' + data.nickname + ': </strong>'+ data.message +'</p>');
+  $("#chatBox").append('<br><p><strong>' + data.nickname + ': </strong>'+ decrypt(data.message, roomCode) +'</p>');
   $('#typing').text('');
 });
 
@@ -36,7 +36,7 @@ function send(){
   socket.emit('chatMessage', {
     'nickname' : nickname,
     'room' : roomCode,
-    'message' : $('#messageBox').val()
+    'message' : encrypt($('#messageBox').val(), roomCode)
   });
   $('#messageBox').val("");
 }
