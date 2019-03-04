@@ -26,6 +26,14 @@ exports.socketConnection = function(server){
 
     socket.on('chatMessage', data=>{
       io.sockets.in(data.room).emit('chatMessage', data);
+
+      //Store Message to Database
+      Room.findOne({'code' : data.room}).then(result=>{
+        setTimeout(()=>{ //To ensure data is written to database
+          result.messages.push({'message' : data.message, 'sender' : data.nickname});
+          result.save();
+        },2000);
+      })
     });
 
 
@@ -35,22 +43,22 @@ exports.socketConnection = function(server){
 
 
     socket.on('disconnect', ()=>{
-      //Delete user from Database
-      Room.findOne({'members.id' : socket.id}).then(result=>{
-        if(result.members.length===1){
-          //Remove room if the only member disconnected
-          Room.findByIdAndRemove(result._id).exec();
-          console.log("Deleted room " + result._id);
-        }
-        else{ //Just remove the member from members array
-          let tempArr = result.members.filter(record=>{
-            return record.id === socket.id;
-          })
-          console.log(tempArr[0].nickname + " disconnected");
-          tempArr[0].remove();
-          result.save();
-        }
-      })
+      // //Delete user from Database
+      // Room.findOne({'members.id' : socket.id}).then(result=>{
+      //   if(result.members.length===1){
+      //     //Remove room if the only member disconnected
+      //     Room.findByIdAndRemove(result._id).exec();
+      //     console.log("Deleted room " + result._id);
+      //   }
+      //   else{ //Just remove the member from members array
+      //     let tempArr = result.members.filter(record=>{
+      //       return record.id === socket.id;
+      //     })
+      //     console.log(tempArr[0].nickname + " disconnected");
+      //     tempArr[0].remove();
+      //     result.save();
+      //   }
+      // })
     });
 
 

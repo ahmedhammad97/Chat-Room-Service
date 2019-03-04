@@ -6,9 +6,15 @@ const MemberSchema = new Schema({
     id : String
 });
 
+const MessageSchema = new Schema({
+    message: String,
+    sender: String
+});
+
 const RoomSchema = new Schema({
     code: String,
-    members: [MemberSchema]
+    members: [MemberSchema],
+    messages: [MessageSchema]
 });
 
 const Room = mongoose.model('room', RoomSchema);

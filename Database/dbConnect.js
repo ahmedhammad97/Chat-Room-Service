@@ -8,7 +8,7 @@ function connect(){
   mongoose.connection.once('open', function(){
       console.log('Connection has been made, now make fireworks...');
   }).on('error', function(error){
-      console.log('Connection error:', error.err);
+      console.log('Connection error:', error);
   });
 }
 
