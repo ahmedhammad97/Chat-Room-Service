@@ -6,7 +6,7 @@ I used Ajax calls for the front-end to post requring to create/join a room. Afte
 
 The process of sending chat message or even just typing, sends a notification for the back-end through a web socket to perform a certain action.
 
-The encryption of the messages happens on the client, where it uses the room code to generate a salt, which is then passed to an encryption algorithm, along with the message itself, resulting in a hashed message that cannot be understood by any other party even the server. Decryption does the same procedure in a reversed way. 
+The encryption of the messages happens on the client, where it uses the room code to generate a salt, which is then passed to a version of ceaser cypher encryption algorithm, along with the message itself, resulting in a hashed message that cannot be understood by any other party even the server. Decryption does the same procedure in a reversed way. 
 
 When a user leaves the room, the back-end removes his record from the database, and when the last user for a certain room disconnects, the room is completly removed.
 
